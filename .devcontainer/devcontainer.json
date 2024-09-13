@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/java
 {
-	"name": "Java",
+	"name": "InventoryServiceJava",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
 	"features": {
@@ -19,6 +19,11 @@
 			"dockerDashComposeVersion": "latest"
 		}
 	},
+	"initializeCommand": "docker network inspect microservice_shared_network > /dev/null || docker network create microservice_shared_network --attachable",
+	"runArgs": [
+		"--network=microservice_shared_network",
+		"--hostname=inventory"
+	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
@@ -37,7 +42,8 @@
 			"extensions": [
 				"vmware.vscode-boot-dev-pack",
 				"vscjava.vscode-java-pack",
-				"formulahendry.vscode-mysql"
+				"formulahendry.vscode-mysql",
+				"humao.rest-client"
 			]
 		}
 	}
