@@ -14,9 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class InventoryServiceApplicationTests {
 
-	@SuppressWarnings("rawtypes")
 	@ServiceConnection
-	static MySQLContainer mySQLContainer = new MySQLContainer("mysql:8.3.0");
+	static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.3.0");
 	@LocalServerPort
 	private Integer port;
 
@@ -28,6 +27,10 @@ class InventoryServiceApplicationTests {
 
 	static {
 		mySQLContainer.start();
+	}
+
+	@Test
+	void contextLoads() {
 	}
 
 	@Test
